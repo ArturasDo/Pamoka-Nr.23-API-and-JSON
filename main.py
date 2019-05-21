@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 import requests
+import os
 
 
 app = Flask(__name__)
@@ -9,7 +10,8 @@ app = Flask(__name__)
 def index():
     query = "London,UK"
     unit = "metric"  # use "imperial" for Fahrenheit
-    api_key = "API_KEY"
+    api_key = os.getenv("api_key")
+#    api_key = "API_KEY"
 
     url = "https://api.openweathermap.org/data/2.5/weather?q={0}&units={1}&appid={2}".format(query, unit, api_key)
     data = requests.get(url=url)  # GET request to the OpenWeatherMap API
